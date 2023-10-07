@@ -27,7 +27,7 @@ Chart.register(
 export default {
   props: ["targetCurrency", "baseCurrency", "startDate", "endDate"],
   mounted() {
-    // this.createChart();
+    this.createChart();
   },
   methods: {
     async createChart() {
