@@ -27,13 +27,13 @@ Chart.register(
 export default {
   props: ["targetCurrency", "baseCurrency", "startDate", "endDate"],
   mounted() {
-    // this.createChart(); // Usuń to, jeśli chcesz, aby wykres był tworzony tylko po kliknięciu przycisku
+    // this.createChart();
   },
   methods: {
     async createChart() {
       const chartData = await Promise.all(
         this.targetCurrency.map(async (targetCurrency) => {
-          console.log(`Fetching data for ${targetCurrency}`); // Dodano log konsoli
+          console.log(`Fetching data for ${targetCurrency}`);
           const data = await CurrencyService.fetchCurrencyData(
             this.baseCurrency,
             targetCurrency,
@@ -41,10 +41,9 @@ export default {
             this.endDate
           ).catch((error) =>
             console.error(`Error fetching data for ${targetCurrency}:`, error)
-          ); // Dodano obsługę błędów
-          console.log(`Data for ${targetCurrency}:`, data); // Dodano log konsoli
+          );
+          console.log(`Data for ${targetCurrency}:`, data);
           if (data && Array.isArray(data.rates)) {
-            // Dodano sprawdzanie błędów
             return {
               label: targetCurrency,
               data: data.rates.map((rate) => rate[targetCurrency]),
@@ -57,7 +56,6 @@ export default {
       );
 
       if (chartData[0] && chartData[0].data) {
-        // Dodano sprawdzanie błędów
         new Chart(
           document.getElementById("currencyChart"),
           console.log(this.startDate, this.endDate),
